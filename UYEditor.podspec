@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.requires_arc = true
 
-  s.resources = 'HTML/*', 'iOS/EditorToolItems.bundle'
+  s.resources = 'HTML/*', 'iOS/UYEditor.xcassets'
   s.source_files = 'iOS/Source/*' 
   s.frameworks = 'UIKit', 'Foundation'
 end
