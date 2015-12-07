@@ -1,0 +1,58 @@
+* {
+    outline: 0px solid transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+
+body {
+    font-family: "Helvetica Neue";
+    font-weight: normal;
+    word-wrap: break-word;
+    margin:0px;
+    padding: 0px 10px 0px 10px;
+    font-size: 15px;
+}
+
+img {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 100%;
+    opacity:1;
+}
+
+#editor_header, #editor_footer {
+    padding:0px;
+    margin:0px;
+    width:0px;
+    height:0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+}
+
+#editor_placeholder {
+    position: absolute;
+    opacity : 0.5;
+    z-index : -1;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+}
+
+#editor_content, #editor_placeholder  {
+    overflow: auto;
+    width:100%;
+    word-wrap:break-word;
+    color:#808080;
+}
+
+/*-- iPad style --*/
+@media only screen and (min-device-width: 768px) {
+    body {
+        padding: 10px 5% 10px 5%;
+        font-size: 18px;
+    }
+}

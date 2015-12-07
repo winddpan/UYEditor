@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A228C201B8C6DAF009BF74A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A228C161B8C6DAF009BF74A /* AppDelegate.m */; };
+		7A228C211B8C6DAF009BF74A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A228C171B8C6DAF009BF74A /* LaunchScreen.xib */; };
+		7A228C221B8C6DAF009BF74A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A228C191B8C6DAF009BF74A /* Main.storyboard */; };
+		7A228C231B8C6DAF009BF74A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A228C1B1B8C6DAF009BF74A /* Images.xcassets */; };
+		7A228C241B8C6DAF009BF74A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A228C1C1B8C6DAF009BF74A /* Info.plist */; };
+		7A228C251B8C6DAF009BF74A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A228C1D1B8C6DAF009BF74A /* main.m */; };
+		7A228C261B8C6DAF009BF74A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A228C1F1B8C6DAF009BF74A /* ViewController.m */; };
+		7AC034DC1C1571E400967321 /* UIWebView+GUIFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034D31C1571E400967321 /* UIWebView+GUIFixes.m */; };
+		7AC034DD1C1571E400967321 /* UYEditorToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034D51C1571E400967321 /* UYEditorToolbar.m */; };
+		7AC034DE1C1571E400967321 /* UYEditorToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034D71C1571E400967321 /* UYEditorToolbarItem.m */; };
+		7AC034DF1C1571E400967321 /* UYEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034D91C1571E400967321 /* UYEditorView.m */; };
+		7AC034E01C1571E400967321 /* UYEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034DB1C1571E400967321 /* UYEditorViewController.m */; };
+		7AC034FE1C1572F000967321 /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = 7AC034F91C1572F000967321 /* jquery.js */; };
+		7AC034FF1C1572F000967321 /* uyeditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 7AC034FA1C1572F000967321 /* uyeditor.css */; };
+		7AC035001C1572F000967321 /* uyeditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AC034FB1C1572F000967321 /* uyeditor.html */; };
+		7AC035011C1572F000967321 /* uyeditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 7AC034FC1C1572F000967321 /* uyeditor.js */; };
+		7AC035021C1572F000967321 /* uyeditor_debug.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AC034FD1C1572F000967321 /* uyeditor_debug.html */; };
+		7AC035041C1574A600967321 /* UYEditor.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AC035031C1574A600967321 /* UYEditor.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7A228C151B8C6DAF009BF74A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7A228C161B8C6DAF009BF74A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7A228C181B8C6DAF009BF74A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7A228C1A1B8C6DAF009BF74A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7A228C1B1B8C6DAF009BF74A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7A228C1C1B8C6DAF009BF74A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A228C1D1B8C6DAF009BF74A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7A228C1E1B8C6DAF009BF74A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7A228C1F1B8C6DAF009BF74A /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7AC034D21C1571E400967321 /* UIWebView+GUIFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+GUIFixes.h"; sourceTree = "<group>"; };
+		7AC034D31C1571E400967321 /* UIWebView+GUIFixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+GUIFixes.m"; sourceTree = "<group>"; };
+		7AC034D41C1571E400967321 /* UYEditorToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UYEditorToolbar.h; sourceTree = "<group>"; };
+		7AC034D51C1571E400967321 /* UYEditorToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UYEditorToolbar.m; sourceTree = "<group>"; };
+		7AC034D61C1571E400967321 /* UYEditorToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UYEditorToolbarItem.h; sourceTree = "<group>"; };
+		7AC034D71C1571E400967321 /* UYEditorToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UYEditorToolbarItem.m; sourceTree = "<group>"; };
+		7AC034D81C1571E400967321 /* UYEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UYEditorView.h; sourceTree = "<group>"; };
+		7AC034D91C1571E400967321 /* UYEditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UYEditorView.m; sourceTree = "<group>"; };
+		7AC034DA1C1571E400967321 /* UYEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UYEditorViewController.h; sourceTree = "<group>"; };
+		7AC034DB1C1571E400967321 /* UYEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UYEditorViewController.m; sourceTree = "<group>"; };
+		7AC034F91C1572F000967321 /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
+		7AC034FA1C1572F000967321 /* uyeditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = uyeditor.css; sourceTree = "<group>"; };
+		7AC034FB1C1572F000967321 /* uyeditor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = uyeditor.html; sourceTree = "<group>"; };
+		7AC034FC1C1572F000967321 /* uyeditor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uyeditor.js; sourceTree = "<group>"; };
+		7AC034FD1C1572F000967321 /* uyeditor_debug.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = uyeditor_debug.html; sourceTree = "<group>"; };
+		7AC035031C1574A600967321 /* UYEditor.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UYEditor.xcassets; sourceTree = SOURCE_ROOT; };
+		7AE4FAF51B8C6D240089F623 /* UYEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UYEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7AE4FAF21B8C6D240089F623 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7A228C141B8C6DAF009BF74A /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				7A228C151B8C6DAF009BF74A /* AppDelegate.h */,
+				7A228C161B8C6DAF009BF74A /* AppDelegate.m */,
+				7A228C171B8C6DAF009BF74A /* LaunchScreen.xib */,
+				7A228C191B8C6DAF009BF74A /* Main.storyboard */,
+				7A228C1B1B8C6DAF009BF74A /* Images.xcassets */,
+				7A228C1C1B8C6DAF009BF74A /* Info.plist */,
+				7A228C1D1B8C6DAF009BF74A /* main.m */,
+				7A228C1E1B8C6DAF009BF74A /* ViewController.h */,
+				7A228C1F1B8C6DAF009BF74A /* ViewController.m */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		7A228C271B8C6DE7009BF74A /* UYEditor */ = {
+			isa = PBXGroup;
+			children = (
+				7AC035031C1574A600967321 /* UYEditor.xcassets */,
+				7AC034F81C1572F000967321 /* HTML */,
+				7AC034D11C1571E400967321 /* Source */,
+			);
+			path = UYEditor;
+			sourceTree = "<group>";
+		};
+		7AC034D11C1571E400967321 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				7AC034D21C1571E400967321 /* UIWebView+GUIFixes.h */,
+				7AC034D31C1571E400967321 /* UIWebView+GUIFixes.m */,
+				7AC034D41C1571E400967321 /* UYEditorToolbar.h */,
+				7AC034D51C1571E400967321 /* UYEditorToolbar.m */,
+				7AC034D61C1571E400967321 /* UYEditorToolbarItem.h */,
+				7AC034D71C1571E400967321 /* UYEditorToolbarItem.m */,
+				7AC034D81C1571E400967321 /* UYEditorView.h */,
+				7AC034D91C1571E400967321 /* UYEditorView.m */,
+				7AC034DA1C1571E400967321 /* UYEditorViewController.h */,
+				7AC034DB1C1571E400967321 /* UYEditorViewController.m */,
+			);
+			path = Source;
+			sourceTree = SOURCE_ROOT;
+		};
+		7AC034F81C1572F000967321 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				7AC034F91C1572F000967321 /* jquery.js */,
+				7AC034FA1C1572F000967321 /* uyeditor.css */,
+				7AC034FB1C1572F000967321 /* uyeditor.html */,
+				7AC034FC1C1572F000967321 /* uyeditor.js */,
+				7AC034FD1C1572F000967321 /* uyeditor_debug.html */,
+			);
+			name = HTML;
+			path = ../../HTML;
+			sourceTree = "<group>";
+		};
+		7AE4FAEC1B8C6D240089F623 = {
+			isa = PBXGroup;
+			children = (
+				7A228C271B8C6DE7009BF74A /* UYEditor */,
+				7A228C141B8C6DAF009BF74A /* Example */,
+				7AE4FAF61B8C6D240089F623 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7AE4FAF61B8C6D240089F623 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7AE4FAF51B8C6D240089F623 /* UYEditor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7AE4FAF41B8C6D240089F623 /* UYEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AE4FB181B8C6D250089F623 /* Build configuration list for PBXNativeTarget "UYEditor" */;
+			buildPhases = (
+				7AE4FAF11B8C6D240089F623 /* Sources */,
+				7AE4FAF21B8C6D240089F623 /* Frameworks */,
+				7AE4FAF31B8C6D240089F623 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UYEditor;
+			productName = UYEditor;
+			productReference = 7AE4FAF51B8C6D240089F623 /* UYEditor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7AE4FAED1B8C6D240089F623 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = Cimu;
+				TargetAttributes = {
+					7AE4FAF41B8C6D240089F623 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 7AE4FAF01B8C6D240089F623 /* Build configuration list for PBXProject "UYEditor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7AE4FAEC1B8C6D240089F623;
+			productRefGroup = 7AE4FAF61B8C6D240089F623 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7AE4FAF41B8C6D240089F623 /* UYEditor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7AE4FAF31B8C6D240089F623 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC034FF1C1572F000967321 /* uyeditor.css in Resources */,
+				7AC034FE1C1572F000967321 /* jquery.js in Resources */,
+				7A228C241B8C6DAF009BF74A /* Info.plist in Resources */,
+				7AC035021C1572F000967321 /* uyeditor_debug.html in Resources */,
+				7AC035041C1574A600967321 /* UYEditor.xcassets in Resources */,
+				7A228C231B8C6DAF009BF74A /* Images.xcassets in Resources */,
+				7AC035001C1572F000967321 /* uyeditor.html in Resources */,
+				7A228C211B8C6DAF009BF74A /* LaunchScreen.xib in Resources */,
+				7AC035011C1572F000967321 /* uyeditor.js in Resources */,
+				7A228C221B8C6DAF009BF74A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7AE4FAF11B8C6D240089F623 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A228C261B8C6DAF009BF74A /* ViewController.m in Sources */,
+				7AC034DE1C1571E400967321 /* UYEditorToolbarItem.m in Sources */,
+				7AC034DC1C1571E400967321 /* UIWebView+GUIFixes.m in Sources */,
+				7A228C251B8C6DAF009BF74A /* main.m in Sources */,
+				7A228C201B8C6DAF009BF74A /* AppDelegate.m in Sources */,
+				7AC034DD1C1571E400967321 /* UYEditorToolbar.m in Sources */,
+				7AC034DF1C1571E400967321 /* UYEditorView.m in Sources */,
+				7AC034E01C1571E400967321 /* UYEditorViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7A228C171B8C6DAF009BF74A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A228C181B8C6DAF009BF74A /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		7A228C191B8C6DAF009BF74A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A228C1A1B8C6DAF009BF74A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7AE4FB161B8C6D250089F623 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7AE4FB171B8C6D250089F623 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7AE4FB191B8C6D250089F623 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Example/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7AE4FB1A1B8C6D250089F623 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Example/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7AE4FAF01B8C6D240089F623 /* Build configuration list for PBXProject "UYEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AE4FB161B8C6D250089F623 /* Debug */,
+				7AE4FB171B8C6D250089F623 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AE4FB181B8C6D250089F623 /* Build configuration list for PBXNativeTarget "UYEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AE4FB191B8C6D250089F623 /* Debug */,
+				7AE4FB1A1B8C6D250089F623 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7AE4FAED1B8C6D240089F623 /* Project object */;
+}

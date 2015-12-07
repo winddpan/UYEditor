@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="jquery.js"></script>
+    <script src="uyeditor.js"></script>
+    <link rel="stylesheet" href="uyeditor.css" type="text/css">
+</head>
+<body onLoad="init();uyeditor.setHTML('123<img src= &quot;http://d.youth.cn/tpxw_35291/201505/W020150503294863773411.jpg &quot;/>456<img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot;/>789');">
+    <div id="editor_header"></div>
+    <div class="container">
+        <div id="editor_placeholder"></div>
+        <div id="editor_content" contenteditable="true"></div>
+    </div>
+    <div id="editor_footer"></div>
+</body>
+</html>
