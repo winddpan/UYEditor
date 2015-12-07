@@ -13,7 +13,7 @@
 @interface UYEditorView ()
 @property (strong, nonatomic) NSMutableArray *javaScriptQueue;
 @property (nonatomic) BOOL isWebViewLoaded;
-@property (nonatomic) BOOL isFirstResponder;
+@property (nonatomic) BOOL _isFirstResponder;
 @property (nonatomic) CGFloat lastEditorHeight;
 @property (strong, readwrite)  UIWebView *webView;
 @end
@@ -163,11 +163,11 @@
         [self.delegate editorViewDidLoaded:self];
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if ([self isFirstResponder]) {
+    if ([self isFirstResponder]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self focusEditor];
-        }
-    });
+        });
+    }
 }
 
 #pragma mark - KVO
@@ -245,31 +245,29 @@
 }
 
 - (BOOL)canResignFirstResponder {
-    return _isFirstResponder;
+    return self.editable;
 }
 
 - (BOOL)isFirstResponder {
-    return _isFirstResponder;
+    return __isFirstResponder;
 }
 
 - (BOOL)becomeFirstResponder {
+    __isFirstResponder = YES;
+    
     if (self.isWebViewLoaded) {
         [self focusEditor];
-    }
-    if ([self canBecomeFirstResponder]) {
-        _isFirstResponder = YES;
-        return YES;
     }
     return NO;
 }
 
 - (BOOL)resignFirstResponder {
-    [self blurEditor];
-    if (_isFirstResponder) {
-        _isFirstResponder = NO;
-        return YES;
+    __isFirstResponder = NO;
+    
+    if (self.isWebViewLoaded) {
+        [self blurEditor];
     }
-    return NO;
+    return YES;
 }
 
 @end

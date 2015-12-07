@@ -48,7 +48,6 @@ static const CGFloat kToolbarHeight = 44.0;
                     @(UYEditorToolbarHideKeyboard) : @"dismissKeyboard",
                     };
     
-    self.editorView = [[UYEditorView alloc] init];
     self.editorView.frame = self.view.bounds;
     self.editorView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.editorView.delegate = self;
@@ -60,6 +59,13 @@ static const CGFloat kToolbarHeight = 44.0;
         [item setAction:@selector(triggleToolbarItemAction:)];
     }];
     self.editorView.webView.customInputAccessoryView = self.toolbar;
+}
+
+- (UYEditorView *)editorView {
+    if (!_editorView) {
+        _editorView = [[UYEditorView alloc] init];
+    }
+    return _editorView;
 }
 
 #pragma clang diagnostic push

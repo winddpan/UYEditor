@@ -20,6 +20,17 @@
     NSLog(@"wv:%@", self.webView);
     self.placeholder = @"输入你的内容";
     [self becomeFirstResponder];
+    
+    UIBarButtonItem *next = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testSubNav)];
+    self.navigationItem.rightBarButtonItem = next;
+}
+
+- (void)testSubNav {
+    UYEditorViewController *new = [[UYEditorViewController alloc] init];
+    new.placeholder = @"新的一页";
+    [self.navigationController pushViewController:new animated:YES];
+    
+    NSLog(@"new:%@", new.webView);
 }
 
 @end
