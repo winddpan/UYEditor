@@ -14,7 +14,9 @@
     @private
     UIScrollView *toolBarScroll;
     UIToolbar *toolbar;
+    UIToolbar *keyboardToolbar;
+    CGFloat _toolbarWidth;
 }
-
-@property (readonly, strong) NSArray *items;
+@property (nonatomic, assign) BOOL disableImagePicker;
+@property (readonly, strong)  NSArray *items;
 @end

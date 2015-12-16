@@ -8,10 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = "UYEditor"
-  s.version          = "0.2"
+  s.version          = "0.3"
   s.summary          = "UYEditor"
   s.description      = <<-DESC
-                       UYEditor v0.2
+                        #UYEditor
                        DESC
 
   s.homepage         = "http://gitlab.corp.cimu.com/youyu/UYEditor"

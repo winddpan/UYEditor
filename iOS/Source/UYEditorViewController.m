@@ -53,7 +53,6 @@ static const CGFloat kToolbarHeight = 44.0;
     self.editorView.delegate = self;
     [self.view addSubview:self.editorView];
     
-    self.toolbar = [[UYEditorToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kToolbarHeight)];
     [self.toolbar.items enumerateObjectsUsingBlock:^(UYEditorToolbarItem *item, NSUInteger idx, BOOL *stop) {
         [item setTarget:self];
         [item setAction:@selector(triggleToolbarItemAction:)];
@@ -66,6 +65,13 @@ static const CGFloat kToolbarHeight = 44.0;
         _editorView = [[UYEditorView alloc] init];
     }
     return _editorView;
+}
+
+- (UYEditorToolbar *)toolbar {
+    if (!_toolbar) {
+        _toolbar = [[UYEditorToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kToolbarHeight)];
+    }
+    return _toolbar;
 }
 
 #pragma clang diagnostic push
@@ -143,6 +149,17 @@ static const CGFloat kToolbarHeight = 44.0;
 
 - (NSString *)placeholder {
     return self.editorView.placeholder;
+}
+
+- (void)setDisableImagePicker:(BOOL)disableImagePicker {
+    _disableImagePicker = disableImagePicker;
+    
+    // ToolbarItem会重新生成，需要重新指定target selector
+    self.toolbar.disableImagePicker = disableImagePicker;
+    [self.toolbar.items enumerateObjectsUsingBlock:^(UYEditorToolbarItem *item, NSUInteger idx, BOOL *stop) {
+        [item setTarget:self];
+        [item setAction:@selector(triggleToolbarItemAction:)];
+    }];
 }
 
 #pragma mark - ToolbarItem Actions

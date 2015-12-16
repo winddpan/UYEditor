@@ -23,6 +23,8 @@
     
     UIBarButtonItem *next = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testSubNav)];
     self.navigationItem.rightBarButtonItem = next;
+    
+    self.disableImagePicker = YES;
 }
 
 - (void)testSubNav {

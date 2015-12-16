@@ -23,6 +23,7 @@
 @property (nonatomic, readwrite)    BOOL editable;
 @property (nonatomic, readwrite)    NSString *placeholder;
 @property (nonatomic, readwrite)    NSString *html;
+@property (nonatomic, assign)       BOOL disableImagePicker;
 
 - (BOOL)isHTMLUpdated;
 - (void)runJavaScript:(NSString *)javaScript;
