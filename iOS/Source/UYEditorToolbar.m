@@ -157,9 +157,7 @@ static const CGFloat UYEditorToolbarKeyboardItemWidth = 44.0;
     
     CGRect toolbarFrame = toolbar.frame;
     toolbarFrame.size.width = MAX(_toolbarWidth, toolBarScroll.frame.size.width);
-    toolbar.frame = toolbarFrame;
-    
-    toolBarScroll.backgroundColor = [UIColor redColor];
+    toolbar.frame = toolbarFrame;    
     toolBarScroll.contentSize = CGSizeMake(toolbar.frame.size.width, toolBarScroll.contentSize.height);
 }
 
