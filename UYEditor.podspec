@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "UYEditor"
-  s.version          = "0.3"
+  s.version          = "0.31"
   s.summary          = "UYEditor"
   s.description      = <<-DESC
                         #UYEditor

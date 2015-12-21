@@ -1,5 +1,5 @@
 /*
- * UYEditor v0.2
+ * UYEditor v0.3
  */
 
 var uyeditor = {};
@@ -63,9 +63,8 @@ init = function() {
                 uyeditor.focusEditor();
             }
         }
-        callbackContentHeightUpdated();
-        callbackInput();
         updatePlaceholder();
+        callbackInput();
     });
     
     $(document).on('selectionchange',function(e){

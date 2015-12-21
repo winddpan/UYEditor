@@ -16,6 +16,8 @@
 @property (nonatomic) BOOL _isFirstResponder;
 @property (nonatomic) CGFloat lastEditorHeight;
 @property (strong, readwrite)  UIWebView *webView;
+@property (nonatomic) BOOL isScrollIndicatorFlashing;
+@property (nonatomic) BOOL shouldFlashScrollIndicator;
 @end
 
 @implementation UYEditorView
@@ -68,6 +70,14 @@
     UIScrollView *scrollView = self.webView.scrollView;
     if (scrollView.contentSize.height != self.lastEditorHeight) {
         scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.webView.frame),  self.lastEditorHeight);
+        
+        if (!self.isScrollIndicatorFlashing && self.shouldFlashScrollIndicator) {
+            self.isScrollIndicatorFlashing = YES;
+            [self.webView.scrollView flashScrollIndicators];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.isScrollIndicatorFlashing = NO;
+            });
+        }
     }
 }
 
@@ -91,18 +101,18 @@
     CGRect viewport = [self viewport];
     CGFloat caretYOffset = UYEV_JS(@"uyeditor.getYCaretInfo().top;").integerValue +
                            UYEV_JS(@"uyeditor.getYCaretInfo().height;").integerValue;
+    CGFloat fontSize = UYEV_JS(@"$('#editor_content').css('font-size')").doubleValue;
     
-    CGFloat footerTop = UYEV_JS(@"$(editor_footer).position().top;").integerValue;
-    CGFloat footerHeight = UYEV_JS(@"$(editor_footer).height();").integerValue;
-    CGFloat paddingBottom = footerTop + footerHeight;
+    //CGFloat footerTop = UYEV_JS(@"$(editor_footer).position().top;").integerValue;
+    //CGFloat footerHeight = UYEV_JS(@"$(editor_footer).height();").integerValue;
     
-    CGFloat offsetBottom = caretYOffset + paddingBottom;
+    CGFloat offsetBottom = caretYOffset;
     BOOL mustScroll = (caretYOffset < viewport.origin.y || offsetBottom > viewport.origin.y + CGRectGetHeight(viewport));
     if (mustScroll) {
-        CGFloat necessaryHeight = viewport.size.height / 2;
-        caretYOffset = MIN(caretYOffset, self.webView.scrollView.contentSize.height - necessaryHeight);
+        CGFloat necessaryHeight = viewport.size.height;
+        CGFloat offsetY = MAX(0, caretYOffset -  necessaryHeight + ceil(fontSize/2.0 + 1));
         CGRect targetRect = CGRectMake(0.0f,
-                                       caretYOffset,
+                                       offsetY,
                                        CGRectGetWidth(viewport),
                                        necessaryHeight);
         [self.webView.scrollView scrollRectToVisible:targetRect animated:animated];
@@ -118,7 +128,11 @@
     } else if ([url hasPrefix:@"contentheight://"]) {
         [self refreshVisibleViewportAndContentSize];
     } else if ([url hasPrefix:@"input://"]) {
+        self.shouldFlashScrollIndicator = YES;
         [self scrollToCaretAnimated:NO];
+        [self refreshVisibleViewportAndContentSize];
+        self.shouldFlashScrollIndicator = NO;
+        
         if ([self.delegate respondsToSelector:@selector(editorViewDidInput:)]) {
             [self.delegate editorViewDidInput:self];
         }

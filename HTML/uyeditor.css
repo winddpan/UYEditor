@@ -26,7 +26,7 @@ img {
 #editor_header, #editor_footer {
     padding:0px;
     margin:0px;
-    width:0px;
+    width: 100%;
     height:0px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -50,7 +50,7 @@ img {
 }
 
 /*-- iPad style --*/
-@media only screen and (min-device-width: 768px) {
+@media only screen and (min-device-width: 758px) {
     body {
         padding: 10px 5% 10px 5%;
         font-size: 18px;

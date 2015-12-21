@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1270BE1C27A756005F6CC5 /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = 7A1270B91C27A756005F6CC5 /* jquery.js */; };
+		7A1270BF1C27A756005F6CC5 /* uyeditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 7A1270BA1C27A756005F6CC5 /* uyeditor.css */; };
+		7A1270C01C27A756005F6CC5 /* uyeditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 7A1270BB1C27A756005F6CC5 /* uyeditor.html */; };
+		7A1270C11C27A756005F6CC5 /* uyeditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 7A1270BC1C27A756005F6CC5 /* uyeditor.js */; };
+		7A1270C21C27A756005F6CC5 /* uyeditor_debug.html in Resources */ = {isa = PBXBuildFile; fileRef = 7A1270BD1C27A756005F6CC5 /* uyeditor_debug.html */; };
 		7A228C201B8C6DAF009BF74A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A228C161B8C6DAF009BF74A /* AppDelegate.m */; };
 		7A228C211B8C6DAF009BF74A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A228C171B8C6DAF009BF74A /* LaunchScreen.xib */; };
 		7A228C221B8C6DAF009BF74A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A228C191B8C6DAF009BF74A /* Main.storyboard */; };
@@ -19,16 +24,16 @@
 		7AC034DE1C1571E400967321 /* UYEditorToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034D71C1571E400967321 /* UYEditorToolbarItem.m */; };
 		7AC034DF1C1571E400967321 /* UYEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034D91C1571E400967321 /* UYEditorView.m */; };
 		7AC034E01C1571E400967321 /* UYEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC034DB1C1571E400967321 /* UYEditorViewController.m */; };
-		7AC035341C157D9000967321 /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = 7AC0352F1C157D9000967321 /* jquery.js */; };
-		7AC035351C157D9000967321 /* uyeditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 7AC035301C157D9000967321 /* uyeditor.css */; };
-		7AC035361C157D9000967321 /* uyeditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AC035311C157D9000967321 /* uyeditor.html */; };
-		7AC035371C157D9000967321 /* uyeditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 7AC035321C157D9000967321 /* uyeditor.js */; };
-		7AC035381C157D9000967321 /* uyeditor_debug.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AC035331C157D9000967321 /* uyeditor_debug.html */; };
 		7AC0353A1C157D9500967321 /* UYEditor.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7AC035391C157D9500967321 /* UYEditor.podspec */; };
 		7AC0353C1C1585AD00967321 /* UYEditor.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AC0353B1C1585AD00967321 /* UYEditor.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A1270B91C27A756005F6CC5 /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
+		7A1270BA1C27A756005F6CC5 /* uyeditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = uyeditor.css; sourceTree = "<group>"; };
+		7A1270BB1C27A756005F6CC5 /* uyeditor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = uyeditor.html; sourceTree = "<group>"; };
+		7A1270BC1C27A756005F6CC5 /* uyeditor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uyeditor.js; sourceTree = "<group>"; };
+		7A1270BD1C27A756005F6CC5 /* uyeditor_debug.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = uyeditor_debug.html; sourceTree = "<group>"; };
 		7A228C151B8C6DAF009BF74A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A228C161B8C6DAF009BF74A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7A228C181B8C6DAF009BF74A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -48,11 +53,6 @@
 		7AC034D91C1571E400967321 /* UYEditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UYEditorView.m; sourceTree = "<group>"; };
 		7AC034DA1C1571E400967321 /* UYEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UYEditorViewController.h; sourceTree = "<group>"; };
 		7AC034DB1C1571E400967321 /* UYEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UYEditorViewController.m; sourceTree = "<group>"; };
-		7AC0352F1C157D9000967321 /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
-		7AC035301C157D9000967321 /* uyeditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = uyeditor.css; sourceTree = "<group>"; };
-		7AC035311C157D9000967321 /* uyeditor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = uyeditor.html; sourceTree = "<group>"; };
-		7AC035321C157D9000967321 /* uyeditor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uyeditor.js; sourceTree = "<group>"; };
-		7AC035331C157D9000967321 /* uyeditor_debug.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = uyeditor_debug.html; sourceTree = "<group>"; };
 		7AC035391C157D9500967321 /* UYEditor.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UYEditor.podspec; path = ../UYEditor.podspec; sourceTree = "<group>"; };
 		7AC0353B1C1585AD00967321 /* UYEditor.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UYEditor.xcassets; sourceTree = SOURCE_ROOT; };
 		7AE4FAF51B8C6D240089F623 /* UYEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UYEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +69,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A1270B81C27A756005F6CC5 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				7A1270B91C27A756005F6CC5 /* jquery.js */,
+				7A1270BA1C27A756005F6CC5 /* uyeditor.css */,
+				7A1270BB1C27A756005F6CC5 /* uyeditor.html */,
+				7A1270BC1C27A756005F6CC5 /* uyeditor.js */,
+				7A1270BD1C27A756005F6CC5 /* uyeditor_debug.html */,
+			);
+			name = HTML;
+			path = ../../HTML;
+			sourceTree = "<group>";
+		};
 		7A228C141B8C6DAF009BF74A /* Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				7AC0353B1C1585AD00967321 /* UYEditor.xcassets */,
-				7AC0352E1C157D9000967321 /* HTML */,
+				7A1270B81C27A756005F6CC5 /* HTML */,
 				7AC034D11C1571E400967321 /* Source */,
 			);
 			path = UYEditor;
@@ -111,19 +124,6 @@
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
-		};
-		7AC0352E1C157D9000967321 /* HTML */ = {
-			isa = PBXGroup;
-			children = (
-				7AC0352F1C157D9000967321 /* jquery.js */,
-				7AC035301C157D9000967321 /* uyeditor.css */,
-				7AC035311C157D9000967321 /* uyeditor.html */,
-				7AC035321C157D9000967321 /* uyeditor.js */,
-				7AC035331C157D9000967321 /* uyeditor_debug.html */,
-			);
-			name = HTML;
-			path = ../../HTML;
-			sourceTree = "<group>";
 		};
 		7AE4FAEC1B8C6D240089F623 = {
 			isa = PBXGroup;
@@ -200,16 +200,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AC035351C157D9000967321 /* uyeditor.css in Resources */,
-				7AC035341C157D9000967321 /* jquery.js in Resources */,
-				7AC035381C157D9000967321 /* uyeditor_debug.html in Resources */,
+				7A1270BF1C27A756005F6CC5 /* uyeditor.css in Resources */,
 				7A228C241B8C6DAF009BF74A /* Info.plist in Resources */,
 				7AC0353C1C1585AD00967321 /* UYEditor.xcassets in Resources */,
+				7A1270C11C27A756005F6CC5 /* uyeditor.js in Resources */,
 				7A228C231B8C6DAF009BF74A /* Images.xcassets in Resources */,
-				7AC035361C157D9000967321 /* uyeditor.html in Resources */,
 				7A228C211B8C6DAF009BF74A /* LaunchScreen.xib in Resources */,
-				7AC035371C157D9000967321 /* uyeditor.js in Resources */,
+				7A1270C01C27A756005F6CC5 /* uyeditor.html in Resources */,
+				7A1270C21C27A756005F6CC5 /* uyeditor_debug.html in Resources */,
 				7AC0353A1C157D9500967321 /* UYEditor.podspec in Resources */,
+				7A1270BE1C27A756005F6CC5 /* jquery.js in Resources */,
 				7A228C221B8C6DAF009BF74A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
