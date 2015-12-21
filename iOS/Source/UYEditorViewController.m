@@ -20,14 +20,21 @@ static const CGFloat kToolbarHeight = 44.0;
 @property (strong, nonatomic)  UYEditorToolbar *toolbar;
 @property (strong, nonatomic)  NSDictionary *commandMap;
 @property (strong, nonatomic)  NSString *rawHTML;
+@property (assign, nonatomic)  BOOL isDismissing;
 @end
 
 @implementation UYEditorViewController
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    self.isDismissing = YES;
     [self resignFirstResponder];
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.isDismissing = NO;
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad {
@@ -279,7 +286,7 @@ static const CGFloat kToolbarHeight = 44.0;
 #pragma mark - FirstResponder
 
 - (BOOL)canBecomeFirstResponder {
-    return [self.editorView canBecomeFirstResponder];
+    return !self.isDismissing && [self.editorView canBecomeFirstResponder];
 }
 
 - (BOOL)canResignFirstResponder {
