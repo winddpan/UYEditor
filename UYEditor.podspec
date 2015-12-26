@@ -8,16 +8,16 @@
 
 Pod::Spec.new do |s|
   s.name             = "UYEditor"
-  s.version          = "0.31"
+  s.version          = "0.3.1"
   s.summary          = "UYEditor"
   s.description      = <<-DESC
                         #UYEditor
                        DESC
 
-  s.homepage         = "http://gitlab.corp.cimu.com/youyu/UYEditor"
+  s.homepage         = "https://github.com/youyuedu/UYEditor"
   s.license          = 'MIT'
   s.author           = { "winddpan" => "winddpan@126.com" }
-  s.source           = { :git => "http://gitlab.corp.cimu.com/youyu/UYEditor", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/youyuedu/UYEditor", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
