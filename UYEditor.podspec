@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/youyuedu/UYEditor"
   s.license          = 'MIT'
   s.author           = { "winddpan" => "winddpan@126.com" }
-  s.source           = { :git => "https://github.com/youyuedu/UYEditor", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/youyuedu/UYEditor.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
