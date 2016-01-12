@@ -99,18 +99,21 @@
 - (void)scrollToCaretAnimated:(BOOL)animated
 {
     CGRect viewport = [self viewport];
-    CGFloat caretYOffset = UYEV_JS(@"uyeditor.getYCaretInfo().top;").integerValue +
-                           UYEV_JS(@"uyeditor.getYCaretInfo().height;").integerValue;
     CGFloat fontSize = UYEV_JS(@"$('#editor_content').css('font-size')").doubleValue;
+    CGFloat caretBottomOffset = UYEV_JS(@"uyeditor.getYCaretBottom();").integerValue;
     
-    //CGFloat footerTop = UYEV_JS(@"$(editor_footer).position().top;").integerValue;
-    //CGFloat footerHeight = UYEV_JS(@"$(editor_footer).height();").integerValue;
-    
-    CGFloat offsetBottom = caretYOffset;
-    BOOL mustScroll = (caretYOffset < viewport.origin.y || offsetBottom > viewport.origin.y + CGRectGetHeight(viewport));
+    BOOL mustScroll = (caretBottomOffset < viewport.origin.y || caretBottomOffset > viewport.origin.y + CGRectGetHeight(viewport));
     if (mustScroll) {
         CGFloat necessaryHeight = viewport.size.height;
-        CGFloat offsetY = MAX(0, caretYOffset -  necessaryHeight + ceil(fontSize/2.0 + 1));
+        CGFloat offsetY = caretBottomOffset -  necessaryHeight + ceil(fontSize/2.0 + 1);
+        
+        UIScrollView* scrollView = self.webView.scrollView;
+        CGSize contentSize = scrollView.contentSize;
+        if (offsetY > contentSize.height - necessaryHeight) {
+            offsetY = contentSize.height - necessaryHeight;
+        }
+        offsetY = MAX(0, offsetY);
+        
         CGRect targetRect = CGRectMake(0.0f,
                                        offsetY,
                                        CGRectGetWidth(viewport),
@@ -170,7 +173,7 @@
     }];
     [self.javaScriptQueue removeAllObjects];
     self.isWebViewLoaded = YES;
-
+    
     [self refreshVisibleViewportAndContentSize];
     
     if ([self.delegate respondsToSelector:@selector(editorViewDidLoaded:)]) {
@@ -222,7 +225,7 @@
     html = [html stringByReplacingOccurrencesOfString:@"\r"  withString:@"\\r"];
     html = [html stringByReplacingOccurrencesOfString:@"\n"  withString:@"\\n"];
     html = [html stringByReplacingOccurrencesOfString:@"'"  withString:@"\\'"];
-
+    
     return html;
 }
 

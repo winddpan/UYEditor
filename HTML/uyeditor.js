@@ -318,11 +318,8 @@ uyeditor.blurEditor = function() {
     editor.blur();
 }
 
-uyeditor.getYCaretInfo = function() {
-    var caret = {top: 0, height: 0};
-    caret.top = 0;
-    caret.height = 0;
-    var selection = window.getSelection();
+uyeditor.getYCaretBottom = function() {
+        var selection = window.getSelection();
     var noSelectionAvailable = selection.rangeCount == 0;
     
     if (noSelectionAvailable) {
@@ -343,10 +340,12 @@ uyeditor.getYCaretInfo = function() {
         var span = document.createElement('span');  // something happening here preventing selection of elements
         range.insertNode(span);
         var topPosition = span.offsetTop;
+        debug(span.offsetTop + '--' + span.offsetHeight);
+
         span.parentNode.removeChild(span);
-        
         y = topPosition;
         height = range.startContainer.clientHeight;
+
     }else if (range.getClientRects) {
         var rects = range.getClientRects();
         if (rects.length > 0) {
@@ -368,12 +367,9 @@ uyeditor.getYCaretInfo = function() {
             height = rects[0].height;
         }
     }
-    caret.top = y;
-    caret.height = height;
 
-    return caret;
-};
-
+    return y + height;
+}
 
 // #html中是否有文字或者img标签
 uyeditor.isHTMLBlank = function() {
