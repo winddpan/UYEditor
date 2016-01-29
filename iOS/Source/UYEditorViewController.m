@@ -194,7 +194,7 @@ static const CGFloat kToolbarHeight = 44.0;
 - (void)stopEditing {
     _editing = NO;
     
-    if (self.didWebViewLoaded) {
+    if (self.didWebViewLoaded && [self hasFocus]) {
         [self runJavaScriptWhileLoaded:@"uyeditor.blurEditor();"];
     }
 }
