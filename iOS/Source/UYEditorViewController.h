@@ -18,14 +18,18 @@
 @interface UYEditorViewController : UIViewController
 
 @property (weak)    id<UYEditorViewControllerDelegate> delegate;
-@property (nonatomic, readonly)     UIWebView *webView;
-@property (nonatomic, readonly)     BOOL isEditing;
-@property (nonatomic, readwrite)    BOOL editable;
-@property (nonatomic, readwrite)    NSString *placeholder;
-@property (nonatomic, readwrite)    NSString *html;
-@property (nonatomic, assign)       BOOL disableImagePicker;
+@property (nonatomic, readonly) UIWebView *webView;
+@property (nonatomic, assign) BOOL editable;
+@property (nonatomic, readonly, getter=isEditing) BOOL editing;
+@property (nonatomic, assign) BOOL disableImagePicker;
+
+@property (nonatomic, copy)   NSString *placeholder;
+@property (nonatomic, copy)   NSString *html;
+
+- (void)startEditing;
+- (void)stopEditing;
 
 - (BOOL)isHTMLUpdated;
-- (void)runJavaScript:(NSString *)javaScript;
+- (void)runJavaScriptWhileLoaded:(NSString *)javaScript;
 
 @end

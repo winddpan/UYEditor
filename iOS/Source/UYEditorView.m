@@ -8,12 +8,11 @@
 
 #import "UYEditorView.h"
 
-#define UYEV_JS(format, ...)   [self.webView stringByEvaluatingJavaScriptFromString:([NSString stringWithFormat:format, ##__VA_ARGS__])]
+#define UYEV_RUN_JS(format, ...)   [self.webView stringByEvaluatingJavaScriptFromString:([NSString stringWithFormat:format, ##__VA_ARGS__])]
 
 @interface UYEditorView ()
 @property (strong, nonatomic) NSMutableArray *javaScriptQueue;
 @property (nonatomic) BOOL isWebViewLoaded;
-@property (nonatomic) BOOL _isFirstResponder;
 @property (nonatomic) CGFloat lastEditorHeight;
 @property (strong, readwrite)  UIWebView *webView;
 @property (nonatomic) BOOL isScrollIndicatorFlashing;
@@ -21,7 +20,6 @@
 @end
 
 @implementation UYEditorView
-@synthesize html = _html, placeholder = _placeholder;
 
 #pragma mark - Lifecycle
 
@@ -33,7 +31,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.editable = YES;
         self.isWebViewLoaded = NO;
         self.javaScriptQueue = [[NSMutableArray alloc] init];
         
@@ -63,8 +60,8 @@
 
 - (void)refreshVisibleViewportAndContentSize
 {
-    CGFloat footerTop = UYEV_JS(@"$(editor_footer).position().top;").integerValue;
-    CGFloat footerHeight = UYEV_JS(@"$(editor_footer).height();").integerValue;
+    CGFloat footerTop = UYEV_RUN_JS(@"$(editor_footer).position().top;").integerValue;
+    CGFloat footerHeight = UYEV_RUN_JS(@"$(editor_footer).height();").integerValue;
     self.lastEditorHeight = footerTop + footerHeight;
     
     UIScrollView *scrollView = self.webView.scrollView;
@@ -99,8 +96,8 @@
 - (void)scrollToCaretAnimated:(BOOL)animated
 {
     CGRect viewport = [self viewport];
-    CGFloat fontSize = UYEV_JS(@"$('#editor_content').css('font-size')").doubleValue;
-    CGFloat caretBottomOffset = UYEV_JS(@"uyeditor.getYCaretBottom();").integerValue;
+    CGFloat fontSize = UYEV_RUN_JS(@"$('#editor_content').css('font-size')").doubleValue;
+    CGFloat caretBottomOffset = UYEV_RUN_JS(@"uyeditor.getYCaretBottom();").integerValue;
     
     BOOL mustScroll = (caretBottomOffset < viewport.origin.y || caretBottomOffset > viewport.origin.y + CGRectGetHeight(viewport));
     if (mustScroll) {
@@ -147,14 +144,6 @@
     }
 }
 
-- (void)focusEditor {
-    UYEV_JS(@"uyeditor.focusEditor();");
-}
-
-- (void)blurEditor {
-    UYEV_JS(@"uyeditor.blurEditor();");
-}
-
 #pragma mark - UIWebView Delegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -168,22 +157,16 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    self.isWebViewLoaded = YES;
     [self.javaScriptQueue enumerateObjectsUsingBlock:^(NSString *javaScript, NSUInteger idx, BOOL * _Nonnull stop) {
         [self.webView stringByEvaluatingJavaScriptFromString:javaScript];
     }];
     [self.javaScriptQueue removeAllObjects];
-    self.isWebViewLoaded = YES;
     
     [self refreshVisibleViewportAndContentSize];
     
     if ([self.delegate respondsToSelector:@selector(editorViewDidLoaded:)]) {
         [self.delegate editorViewDidLoaded:self];
-    }
-    
-    if ([self isFirstResponder]) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self focusEditor];
-        });
     }
 }
 
@@ -208,83 +191,12 @@
 
 #pragma mark - run JS
 
-- (void)runJavaScript:(NSString *)javaScript {
+- (void)runJavaScriptWhileLoaded:(NSString *)javaScript {
     if (self.isWebViewLoaded) {
         [self.webView stringByEvaluatingJavaScriptFromString:javaScript];
     } else {
         [self.javaScriptQueue addObject:javaScript];
     }
-}
-
-#pragma mark - propery setter/getter
-
-- (NSString *)addSlashes:(NSString *)html
-{
-    html = [html stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
-    html = [html stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    html = [html stringByReplacingOccurrencesOfString:@"\r"  withString:@"\\r"];
-    html = [html stringByReplacingOccurrencesOfString:@"\n"  withString:@"\\n"];
-    html = [html stringByReplacingOccurrencesOfString:@"'"  withString:@"\\'"];
-    
-    return html;
-}
-
-- (void)setPlaceholder:(NSString *)placeholder {
-    _placeholder = placeholder;
-    [self runJavaScript:[NSString stringWithFormat:@"uyeditor.setPlaceholder('%@')", _placeholder ?: @""]];
-}
-
-- (void)setEditable:(BOOL)editable {
-    _editable = editable;
-    [self runJavaScript:[NSString stringWithFormat:@"uyeditor.setEditable(%zd)", _editable]];
-}
-
-- (void)setHtml:(NSString *)html {
-    if ([html rangeOfString:@"\\s*<p>.*</p>\\s*" options:NSRegularExpressionSearch].location == NSNotFound) {
-        html = [NSString stringWithFormat:@"<p>%@</p>", html.length ? html : @"<br>"];
-    }
-    _html = html;
-    [self runJavaScript:[NSString stringWithFormat:@"uyeditor.setHTML('%@')", _html ? [self addSlashes:_html] : @""]];
-}
-
-- (BOOL)isEditing {
-    return [UYEV_JS(@"uyeditor.hasFocus();") isEqualToString:@"true"];
-}
-
-- (NSString *)html {
-    return UYEV_JS(@"uyeditor.getHTML()");
-}
-
-#pragma mark - FirstResponder
-
-- (BOOL)canBecomeFirstResponder {
-    return self.editable;
-}
-
-- (BOOL)canResignFirstResponder {
-    return self.editable;
-}
-
-- (BOOL)isFirstResponder {
-    return __isFirstResponder;
-}
-
-- (BOOL)becomeFirstResponder {
-    __isFirstResponder = YES;
-    
-    if (self.isWebViewLoaded) {
-        [self focusEditor];
-    }
-    return NO;
-}
-
-- (BOOL)resignFirstResponder {
-    __isFirstResponder = NO;
-    
-    if (self.isWebViewLoaded) {
-        [self blurEditor];
-    }
-    return YES;
 }
 
 @end

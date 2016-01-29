@@ -319,7 +319,7 @@ uyeditor.blurEditor = function() {
 }
 
 uyeditor.getYCaretBottom = function() {
-        var selection = window.getSelection();
+    var selection = window.getSelection();
     var noSelectionAvailable = selection.rangeCount == 0;
     
     if (noSelectionAvailable) {
@@ -340,7 +340,7 @@ uyeditor.getYCaretBottom = function() {
         var span = document.createElement('span');  // something happening here preventing selection of elements
         range.insertNode(span);
         var topPosition = span.offsetTop;
-        debug(span.offsetTop + '--' + span.offsetHeight);
+        // debug(span.offsetTop + '--' + span.offsetHeight);
 
         span.parentNode.removeChild(span);
         y = topPosition;

@@ -20,21 +20,31 @@ static const CGFloat kToolbarHeight = 44.0;
 @property (strong, nonatomic)  UYEditorToolbar *toolbar;
 @property (strong, nonatomic)  NSDictionary *commandMap;
 @property (strong, nonatomic)  NSString *rawHTML;
+
 @property (assign, nonatomic)  BOOL isDismissing;
+@property (assign, nonatomic)  BOOL didAppear;
 @end
 
 @implementation UYEditorViewController
+@synthesize html = _html, placeholder = _placeholder, editing = _editing;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.isDismissing = YES;
-    [self resignFirstResponder];
+    _editing = [self hasFocus];
     [super viewWillDisappear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.isDismissing = NO;
+    self.didAppear = NO;
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.didAppear = YES;
+    [self tryFocusEditor];
 }
 
 - (void)viewDidLoad {
@@ -52,9 +62,10 @@ static const CGFloat kToolbarHeight = 44.0;
                     // Selector: [self action]
                     @(UYEditorToolbarInsertImage) : @"insertImage",
                     @(UYEditorToolbarCamera) : @"insertCamearImage",
-                    @(UYEditorToolbarHideKeyboard) : @"dismissKeyboard",
+                    @(UYEditorToolbarHideKeyboard) : @"stopEditing",
                     };
     
+    self.editable = YES;
     self.editorView.frame = self.view.bounds;
     self.editorView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.editorView.delegate = self;
@@ -114,8 +125,8 @@ static const CGFloat kToolbarHeight = 44.0;
 
 #pragma mark - public funcs
 
-- (void)runJavaScript:(NSString *)javaScript {
-    [self.editorView runJavaScript:javaScript];
+- (void)runJavaScriptWhileLoaded:(NSString *)javaScript {
+    [self.editorView runJavaScriptWhileLoaded:javaScript];
 }
 
 - (UIWebView *)webView {
@@ -126,8 +137,35 @@ static const CGFloat kToolbarHeight = 44.0;
     return ![self.rawHTML isEqualToString:self.html];
 }
 
+#pragma mark - propery setter/getter
+
+- (NSString *)_addSlashes:(NSString *)html
+{
+    html = [html stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+    html = [html stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    html = [html stringByReplacingOccurrencesOfString:@"\r"  withString:@"\\r"];
+    html = [html stringByReplacingOccurrencesOfString:@"\n"  withString:@"\\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"'"  withString:@"\\'"];
+    
+    return html;
+}
+
+- (void)setPlaceholder:(NSString *)placeholder {
+    _placeholder = [placeholder copy];
+    [self runJavaScriptWhileLoaded:[NSString stringWithFormat:@"uyeditor.setPlaceholder('%@')", _placeholder ?: @""]];
+}
+
+- (void)setEditable:(BOOL)editable {
+    _editable = editable;
+    [self runJavaScriptWhileLoaded:[NSString stringWithFormat:@"uyeditor.setEditable(%zd)", _editable]];
+}
+
 - (void)setHtml:(NSString *)html {
-    self.editorView.html = html;
+    if ([html rangeOfString:@"\\s*<p>.*</p>\\s*" options:NSRegularExpressionSearch].location == NSNotFound) {
+        html = [NSString stringWithFormat:@"<p>%@</p>", html.length ? html : @"<br>"];
+    }
+    _html = [html copy];
+    [self runJavaScriptWhileLoaded:[NSString stringWithFormat:@"uyeditor.setHTML('%@')", _html ? [self _addSlashes:_html] : @""]];
     
     if (self.didWebViewLoaded) {
         self.rawHTML = self.html;
@@ -135,27 +173,30 @@ static const CGFloat kToolbarHeight = 44.0;
 }
 
 - (NSString *)html {
-    return self.editorView.html;
+    return UYEVC_JS(@"uyeditor.getHTML()");
 }
 
-- (BOOL)isEditing {
-    return self.editorView.isEditing;
+- (BOOL)hasFocus {
+    return [UYEVC_JS(@"uyeditor.hasFocus();") isEqualToString:@"true"];
 }
 
-- (BOOL)editable {
-    return self.editorView.editable;
+- (void)tryFocusEditor {
+    if (self.editing && self.didWebViewLoaded && self.didAppear) {
+        [self runJavaScriptWhileLoaded:@"uyeditor.focusEditor();"];
+    }
 }
 
-- (void)setEditable:(BOOL)editable {
-    self.editorView.editable = editable;
+- (void)startEditing {
+    _editing = YES;
+    [self tryFocusEditor];
 }
 
-- (void)setPlaceholder:(NSString *)placeholder {
-    self.editorView.placeholder = placeholder;
-}
-
-- (NSString *)placeholder {
-    return self.editorView.placeholder;
+- (void)stopEditing {
+    _editing = NO;
+    
+    if (self.didWebViewLoaded) {
+        [self runJavaScriptWhileLoaded:@"uyeditor.blurEditor();"];
+    }
 }
 
 - (void)setDisableImagePicker:(BOOL)disableImagePicker {
@@ -171,10 +212,6 @@ static const CGFloat kToolbarHeight = 44.0;
 
 #pragma mark - ToolbarItem Actions
 
-- (void)dismissKeyboard {
-    [self.editorView resignFirstResponder];
-}
-
 - (void)insertImage {
     [self prepareForInsert];
     
@@ -189,7 +226,7 @@ static const CGFloat kToolbarHeight = 44.0;
 
 - (void)insertCamearImage {
     [self prepareForInsert];
-
+    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.view.backgroundColor = [UIColor whiteColor];
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -251,6 +288,7 @@ static const CGFloat kToolbarHeight = 44.0;
 - (void)editorViewDidLoaded:(UYEditorView *)editorView {
     self.didWebViewLoaded = YES;
     self.rawHTML = self.html;
+    [self tryFocusEditor];
     
     if ([self.delegate respondsToSelector:@selector(editorViewControllerDidLoaded:)]) {
         [self.delegate editorViewControllerDidLoaded:self];
@@ -286,22 +324,30 @@ static const CGFloat kToolbarHeight = 44.0;
 #pragma mark - FirstResponder
 
 - (BOOL)canBecomeFirstResponder {
-    return !self.isDismissing && [self.editorView canBecomeFirstResponder];
+    return !self.isDismissing && _editing;
 }
 
 - (BOOL)canResignFirstResponder {
-    return [self.editorView canResignFirstResponder];
+    return YES;
 }
 
 - (BOOL)isFirstResponder {
-    return [self.editorView isFirstResponder];
+    return [self hasFocus];
 }
 
 - (BOOL)becomeFirstResponder {
-    return [self.editorView becomeFirstResponder];
+    if (_editing) {
+        [self startEditing];
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL)resignFirstResponder {
-    return [self.editorView resignFirstResponder];
+    if (_editing) {
+        [self stopEditing];
+    }
+    return YES;
 }
+
 @end

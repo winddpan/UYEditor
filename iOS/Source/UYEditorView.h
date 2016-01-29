@@ -21,10 +21,5 @@
 @property (nonatomic, weak)     id<UYEditorViewDelegate> delegate;
 @property (nonatomic, readonly) UIWebView *webView;
 
-@property (nonatomic, readonly) BOOL isEditing;
-@property (nonatomic, assign)   BOOL editable;
-@property (nonatomic, strong)   NSString *placeholder;
-@property (nonatomic, strong)   NSString *html;
-
-- (void)runJavaScript:(NSString *)javaScript;
+- (void)runJavaScriptWhileLoaded:(NSString *)javaScript;
 @end
