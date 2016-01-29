@@ -31,6 +31,7 @@ static const CGFloat kToolbarHeight = 44.0;
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.isDismissing = YES;
+    self.didAppear = NO;
     _editing = [self hasFocus];
     [super viewWillDisappear:animated];
 }
