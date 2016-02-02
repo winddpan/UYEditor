@@ -318,7 +318,8 @@ uyeditor.blurEditor = function() {
     editor.blur();
 }
 
-uyeditor.getYCaretBottom = function() {
+uyeditor.getYCaretInfo = function() {
+    var caretArguments = [0, 0];
     var selection = window.getSelection();
     var noSelectionAvailable = selection.rangeCount == 0;
     
@@ -341,8 +342,8 @@ uyeditor.getYCaretBottom = function() {
         span.appendChild( document.createTextNode("\u200b") );
         range.insertNode(span);
         y = span.offsetTop;
-        height = range.startContainer.clientHeight;
         span.parentNode.removeChild(span);
+        height = range.startContainer.clientHeight;
 
     }else if (range.getClientRects) {
         var rects = range.getClientRects();
@@ -364,8 +365,12 @@ uyeditor.getYCaretBottom = function() {
             height = rects[0].height;
         }
     }
+    caretArguments[0] = y;
+    caretArguments[1] = height;
 
-    return y + height;
+    //debug('need:' + needsToWorkAroundNewlineBug + '--caret:' + caretArguments.join(','));
+
+    return caretArguments.join(',');
 }
 
 // #html中是否有文字或者img标签

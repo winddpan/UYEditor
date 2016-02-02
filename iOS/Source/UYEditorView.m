@@ -61,6 +61,8 @@
 
 - (void)refreshVisibleViewportAndContentSize
 {
+    self.isAdjustingContentSize = YES;
+    
     CGFloat footerTop = UYEV_RUN_JS(@"$(editor_footer).position().top;").integerValue;
     CGFloat footerHeight = UYEV_RUN_JS(@"$(editor_footer).height();").integerValue;
     self.lastEditorHeight = footerTop + footerHeight;
@@ -77,6 +79,8 @@
             });
         }
     }
+    
+    self.isAdjustingContentSize = NO;
 }
 
 - (CGRect)viewport
@@ -98,22 +102,18 @@
 {
     CGRect viewport = [self viewport];
     CGFloat fontSize = UYEV_RUN_JS(@"$('#editor_content').css('font-size')").doubleValue;
-    CGFloat caretBottomOffset = UYEV_RUN_JS(@"uyeditor.getYCaretBottom();").integerValue;
+    NSString *caretInfo = UYEV_RUN_JS(@"uyeditor.getYCaretInfo();");
+    NSArray *caretInfoComponents = [caretInfo componentsSeparatedByString:@","];
+    CGFloat caretY = [[caretInfoComponents firstObject] integerValue];
+    CGFloat caretHeight = [[caretInfoComponents lastObject] integerValue];
     
-    BOOL mustScroll = (caretBottomOffset < viewport.origin.y || caretBottomOffset > viewport.origin.y + CGRectGetHeight(viewport));
+    CGFloat padding = ceil(fontSize/2.0 + 1);
+    CGFloat necessaryHeight = MIN(caretHeight + padding, viewport.size.height);
+    
+    BOOL mustScroll = (caretY + necessaryHeight < viewport.origin.y || caretY > viewport.origin.y + CGRectGetHeight(viewport));
     if (mustScroll) {
-        CGFloat necessaryHeight = viewport.size.height;
-        CGFloat offsetY = caretBottomOffset -  necessaryHeight + ceil(fontSize/2.0 + 1);
-        
-        UIScrollView* scrollView = self.webView.scrollView;
-        CGSize contentSize = scrollView.contentSize;
-        if (offsetY > contentSize.height - necessaryHeight) {
-            offsetY = contentSize.height - necessaryHeight;
-        }
-        offsetY = MAX(0, offsetY);
-        
         CGRect targetRect = CGRectMake(0.0f,
-                                       offsetY,
+                                       caretY,
                                        CGRectGetWidth(viewport),
                                        necessaryHeight);
         [self.webView.scrollView scrollRectToVisible:targetRect animated:NO];
@@ -125,13 +125,13 @@
     if ([url hasPrefix:@"debug://"]) {
         NSLog(@"%@", url);
     } else if ([url hasPrefix:@"selection"]) {
-        //[self scrollToCaretAnimated:YES];
     } else if ([url hasPrefix:@"contentheight://"]) {
         [self refreshVisibleViewportAndContentSize];
     } else if ([url hasPrefix:@"input://"]) {
         self.shouldFlashScrollIndicator = YES;
-        [self _adjustContentSizeAndMoveToCaret];
+        [self refreshVisibleViewportAndContentSize];
         self.shouldFlashScrollIndicator = NO;
+        [self scrollToCaret];
         
         if ([self.delegate respondsToSelector:@selector(editorViewDidInput:)]) {
             [self.delegate editorViewDidInput:self];
@@ -175,23 +175,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (object == self.webView.scrollView && [keyPath isEqualToString:@"contentSize"]) {
-        NSValue *newValue = change[NSKeyValueChangeNewKey];
-        CGSize newSize = [newValue CGSizeValue];
-        
         if (!self.isAdjustingContentSize) {
-            [self _adjustContentSizeAndMoveToCaret];
+            [self refreshVisibleViewportAndContentSize];
         }
     }
-}
-
-- (void)_adjustContentSizeAndMoveToCaret {
-    self.isAdjustingContentSize = YES;
-    [self refreshVisibleViewportAndContentSize];
-    [self scrollToCaret];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.isAdjustingContentSize = NO;
-    });
 }
 
 #pragma mark - run JS

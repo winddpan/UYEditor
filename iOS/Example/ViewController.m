@@ -19,8 +19,8 @@
     
     NSLog(@"wv:%@", self.webView);
     self.placeholder = @"输入你的内容";
-    self.html = @"<img src=\"http://h.hiphotos.baidu.com/zhidao/pic/item/503d269759ee3d6d026568e240166d224f4ade7c.jpg\">";
-//    [self becomeFirstResponder];
+    self.html = @"<img src=\"http://h.hiphotos.baidu.com/zhidao/pic/item/503d269759ee3d6d026568e240166d224f4ade7c.jpg\">\n<img src=\"http://h.hiphotos.baidu.com/zhidao/pic/item/503d269759ee3d6d026568e240166d224f4ade7c.jpg\">\n<img src=\"http://h.hiphotos.baidu.com/zhidao/pic/item/503d269759ee3d6d026568e240166d224f4ade7c.jpg\">\n<img src=\"http://h.hiphotos.baidu.com/zhidao/pic/item/503d269759ee3d6d026568e240166d224f4ade7c.jpg\">\n<img src=\"http://h.hiphotos.baidu.com/zhidao/pic/item/503d269759ee3d6d026568e240166d224f4ade7c.jpg\">";
+    [self startEditing];
     
     UIBarButtonItem *next = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testSubNav)];
     self.navigationItem.rightBarButtonItem = next;
