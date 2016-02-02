@@ -338,13 +338,11 @@ uyeditor.getYCaretBottom = function() {
     //
     if (needsToWorkAroundNewlineBug) {
         var span = document.createElement('span');  // something happening here preventing selection of elements
+        span.appendChild( document.createTextNode("\u200b") );
         range.insertNode(span);
-        var topPosition = span.offsetTop;
-        // debug(span.offsetTop + '--' + span.offsetHeight);
-
-        span.parentNode.removeChild(span);
-        y = topPosition;
+        y = span.offsetTop;
         height = range.startContainer.clientHeight;
+        span.parentNode.removeChild(span);
 
     }else if (range.getClientRects) {
         var rects = range.getClientRects();
@@ -358,7 +356,6 @@ uyeditor.getYCaretBottom = function() {
             // should add the scroll offset.
             //
             var addsScrollOffset = document.body.getClientRects()[0].top < 0;
-            
             if (addsScrollOffset) {
                 y = document.body.scrollTop;
             }

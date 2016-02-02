@@ -22,4 +22,5 @@
 @property (nonatomic, readonly) UIWebView *webView;
 
 - (void)runJavaScriptWhileLoaded:(NSString *)javaScript;
+- (void)scrollToCaret;
 @end

@@ -184,6 +184,7 @@ static const CGFloat kToolbarHeight = 44.0;
 - (void)tryFocusEditor {
     if (self.editing && self.didWebViewLoaded && self.didAppear) {
         [self runJavaScriptWhileLoaded:@"uyeditor.focusEditor();"];
+        [self.editorView scrollToCaret];
     }
 }
 

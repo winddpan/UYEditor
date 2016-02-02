@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSMutableArray *javaScriptQueue;
 @property (nonatomic) BOOL isWebViewLoaded;
 @property (nonatomic) CGFloat lastEditorHeight;
+@property (nonatomic) BOOL isAdjustingContentSize;
 @property (strong, readwrite)  UIWebView *webView;
 @property (nonatomic) BOOL isScrollIndicatorFlashing;
 @property (nonatomic) BOOL shouldFlashScrollIndicator;
@@ -93,7 +94,7 @@
  *  @brief      Scrolls to a position where the caret is visible. This uses the values stored in caretYOffest and lineHeight properties.
  *  @param      animated    If the scrolling shoud be animated  The offset to show.
  */
-- (void)scrollToCaretAnimated:(BOOL)animated
+- (void)scrollToCaret
 {
     CGRect viewport = [self viewport];
     CGFloat fontSize = UYEV_RUN_JS(@"$('#editor_content').css('font-size')").doubleValue;
@@ -115,7 +116,7 @@
                                        offsetY,
                                        CGRectGetWidth(viewport),
                                        necessaryHeight);
-        [self.webView.scrollView scrollRectToVisible:targetRect animated:animated];
+        [self.webView.scrollView scrollRectToVisible:targetRect animated:NO];
     }
 }
 
@@ -129,8 +130,7 @@
         [self refreshVisibleViewportAndContentSize];
     } else if ([url hasPrefix:@"input://"]) {
         self.shouldFlashScrollIndicator = YES;
-        [self scrollToCaretAnimated:NO];
-        [self refreshVisibleViewportAndContentSize];
+        [self _adjustContentSizeAndMoveToCaret];
         self.shouldFlashScrollIndicator = NO;
         
         if ([self.delegate respondsToSelector:@selector(editorViewDidInput:)]) {
@@ -178,15 +178,20 @@
         NSValue *newValue = change[NSKeyValueChangeNewKey];
         CGSize newSize = [newValue CGSizeValue];
         
-        if (newSize.height != self.lastEditorHeight) {
-            self.webView.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.frame), self.lastEditorHeight);
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self refreshVisibleViewportAndContentSize];
-                [self scrollToCaretAnimated:NO];
-            });
+        if (!self.isAdjustingContentSize) {
+            [self _adjustContentSizeAndMoveToCaret];
         }
     }
+}
+
+- (void)_adjustContentSizeAndMoveToCaret {
+    self.isAdjustingContentSize = YES;
+    [self refreshVisibleViewportAndContentSize];
+    [self scrollToCaret];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.isAdjustingContentSize = NO;
+    });
 }
 
 #pragma mark - run JS
