@@ -23,6 +23,6 @@ s.platform     = :ios, '7.0'
 s.requires_arc = true
 
 s.resources = 'iOS/HTML/*', 'iOS/UYEditor.xcassets'
-s.source_files = 'iOS/Source/*' 
+s.source_files = 'iOS/Source/**/*.{h,m}'
 s.frameworks = 'UIKit', 'Foundation'
 end
