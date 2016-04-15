@@ -23,14 +23,21 @@
 - (void)setSelected:(BOOL)selected {
     if (self.enableSelected) {
         _selected = selected;
-        self.tintColor = self.selected ? nil : [UIColor lightGrayColor];
+        self.tintColor = self.selected ? self.selectedColor : [UIColor lightGrayColor];
+    }
+}
+
+- (void)setSelectedColor:(UIColor *)selectedColor {
+    _selectedColor = selectedColor;
+    if (self.enableSelected) {
+        self.tintColor = self.selected ? self.selectedColor : [UIColor lightGrayColor];
     }
 }
 
 - (void)setEnableSelected:(BOOL)enableSelected {
     _enableSelected = enableSelected;
     if (!enableSelected) {
-        self.tintColor = nil;
+        self.tintColor = self.selectedColor;
     } else {
         self.tintColor = self.selected ? nil : [UIColor lightGrayColor];
     }

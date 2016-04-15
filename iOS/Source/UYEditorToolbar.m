@@ -74,7 +74,7 @@ static const CGFloat UYEditorToolbarKeyboardItemWidth = 44.0;
     _tintColor = tintColor;
     
     [_items enumerateObjectsUsingBlock:^(UYEditorToolbarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.tintColor = tintColor;
+        obj.selectedColor = tintColor;
     }];
 }
 
@@ -159,7 +159,7 @@ static const CGFloat UYEditorToolbarKeyboardItemWidth = 44.0;
     
     if (self.tintColor) {
         [_items enumerateObjectsUsingBlock:^(UYEditorToolbarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            obj.tintColor = self.tintColor;
+            obj.selectedColor = self.tintColor;
         }];
     }
     [self setNeedsLayout];
