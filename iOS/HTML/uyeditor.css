@@ -33,20 +33,22 @@ img {
     -khtml-user-select: none;
 }
 
+#editor_content, #editor_placeholder  {
+    opacity : 1.0;
+    color:#000000;
+    overflow: auto;
+    width:100%;
+    word-wrap:break-word;
+}
+
 #editor_placeholder {
     position: absolute;
     opacity : 0.5;
+    color:#000000;
     z-index : -1;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
-}
-
-#editor_content, #editor_placeholder  {
-    overflow: auto;
-    width:100%;
-    word-wrap:break-word;
-    color:#808080;
 }
 
 /*-- iPad style --*/

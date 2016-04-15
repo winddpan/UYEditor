@@ -50,6 +50,7 @@ static const CGFloat kToolbarHeight = 44.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[[self class] appearance] applyInvocationTo:self];
     
     _commandMap = @{// Javascript: document.execCommand(action, ...)
                     @(UYEditorToolbarBold) : @"bold",
@@ -72,11 +73,13 @@ static const CGFloat kToolbarHeight = 44.0;
     self.editorView.delegate = self;
     [self.view addSubview:self.editorView];
     
+    self.editorView.webView.customInputAccessoryView = self.toolbar;
+    self.toolbar.disableImagePicker = self.disableImagePicker;
+    self.toolbar.tintColor = self.toolbarTintColor;
     [self.toolbar.items enumerateObjectsUsingBlock:^(UYEditorToolbarItem *item, NSUInteger idx, BOOL *stop) {
         [item setTarget:self];
         [item setAction:@selector(triggleToolbarItemAction:)];
     }];
-    self.editorView.webView.customInputAccessoryView = self.toolbar;
 }
 
 - (UYEditorView *)editorView {
@@ -140,6 +143,16 @@ static const CGFloat kToolbarHeight = 44.0;
 
 #pragma mark - propery setter/getter
 
+- (NSString *)_hexStringFromColor:(UIColor *)color
+{
+    const CGFloat *components = CGColorGetComponents(color.CGColor);
+    CGFloat r = components[0];
+    CGFloat g = components[1];
+    CGFloat b = components[2];
+    NSString *hexString=[NSString stringWithFormat:@"%02X%02X%02X", (int)(r * 255), (int)(g * 255), (int)(b * 255)];
+    return hexString;
+}
+
 - (NSString *)_addSlashes:(NSString *)html
 {
     html = [html stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
@@ -151,9 +164,33 @@ static const CGFloat kToolbarHeight = 44.0;
     return html;
 }
 
+- (void)setFont:(UIFont *)font {
+    _font = [font copy];
+    
+    NSString *js = [NSString stringWithFormat:@"document.body.style.fontSize='%.1fpx';", font.pointSize];
+    js = [js stringByAppendingFormat:@"document.body.style.fontFamily='%@';", font.familyName];
+    [self runJavaScriptWhileLoaded:js];
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+    _textColor = [textColor copy];
+    
+    NSString *js = [NSString stringWithFormat:@"document.getElementById('editor_content').style.color='#%@';", [self _hexStringFromColor:textColor]];
+    js = [js stringByAppendingFormat:@"document.getElementById('editor_content').style.opacity='%.1f';", CGColorGetAlpha(textColor.CGColor)];
+    [self runJavaScriptWhileLoaded:js];
+}
+
 - (void)setPlaceholder:(NSString *)placeholder {
     _placeholder = [placeholder copy];
     [self runJavaScriptWhileLoaded:[NSString stringWithFormat:@"uyeditor.setPlaceholder('%@')", _placeholder ?: @""]];
+}
+
+- (void)setPlaceholderColor:(UIColor *)placeholderColor {
+    _placeholderColor = [placeholderColor copy];
+    
+    NSString *js = [NSString stringWithFormat:@"document.getElementById('editor_placeholder').style.color='#%@';", [self _hexStringFromColor:placeholderColor]];
+    js = [js stringByAppendingFormat:@"document.getElementById('editor_placeholder').style.opacity='%.1f';", CGColorGetAlpha(placeholderColor.CGColor)];
+    [self runJavaScriptWhileLoaded:js];
 }
 
 - (void)setEditable:(BOOL)editable {
@@ -210,6 +247,11 @@ static const CGFloat kToolbarHeight = 44.0;
         [item setTarget:self];
         [item setAction:@selector(triggleToolbarItemAction:)];
     }];
+}
+
+- (void)setToolbarTintColor:(UIColor *)toolbarTintColor {
+    _toolbarTintColor = toolbarTintColor;
+    self.toolbar.tintColor = toolbarTintColor;
 }
 
 #pragma mark - ToolbarItem Actions
@@ -350,6 +392,12 @@ static const CGFloat kToolbarHeight = 44.0;
         [self stopEditing];
     }
     return YES;
+}
+
+#pragma mark - MZApperance
+
++ (instancetype)appearance {
+    return [MZAppearance appearanceForClass:self.class];
 }
 
 @end

@@ -35,20 +35,20 @@ static const CGFloat UYEditorToolbarKeyboardItemWidth = 44.0;
         toolBarScroll.showsVerticalScrollIndicator = NO;
         toolBarScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview:toolBarScroll];
-
+        
         // Toolbar with icons
         toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         toolbar.backgroundColor = [UIColor clearColor];
         [toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         [toolBarScroll addSubview:toolbar];
-
+        
         // Toolbar holder used to crop and position toolbar
         UIView *toolbarCropper = [[UIView alloc] initWithFrame:CGRectMake(toolBarScroll.frame.size.width, 0, UYEditorToolbarKeyboardItemWidth, self.frame.size.height)];
         toolbarCropper.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         toolbarCropper.clipsToBounds = YES;
         [self addSubview:toolbarCropper];
-
+        
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0.5f, toolbarCropper.frame.size.height)];
         line.backgroundColor = [UIColor lightGrayColor];
         line.alpha = 0.7f;
@@ -68,6 +68,14 @@ static const CGFloat UYEditorToolbarKeyboardItemWidth = 44.0;
 - (void)setDisableImagePicker:(BOOL)disableImagePicker {
     _disableImagePicker = disableImagePicker;
     [self buildToolbarItems];
+}
+
+- (void)setTintColor:(UIColor *)tintColor {
+    _tintColor = tintColor;
+    
+    [_items enumerateObjectsUsingBlock:^(UYEditorToolbarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.tintColor = tintColor;
+    }];
 }
 
 - (void)buildToolbarItems {
@@ -126,7 +134,7 @@ static const CGFloat UYEditorToolbarKeyboardItemWidth = 44.0;
         }
     }];
     [toolbar setItems:toolbarItems animated:NO];
-
+    
     UYEditorToolbarItem *keyboardItem = [[UYEditorToolbarItem alloc] initWithImage:[UIImage imageNamed:@"kb_dismiss"] style:UIBarButtonItemStylePlain target:nil action:nil];
     keyboardItem.actionIdentifer = UYEditorToolbarHideKeyboard;
     keyboardItem.enableSelected = NO;
@@ -149,6 +157,11 @@ static const CGFloat UYEditorToolbarKeyboardItemWidth = 44.0;
     }];
     _toolbarWidth = right - left + ([self isPad] ? UYEditorToolbarItemSizeIPad : UYEditorToolbarItemSizeIPhone);
     
+    if (self.tintColor) {
+        [_items enumerateObjectsUsingBlock:^(UYEditorToolbarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.tintColor = self.tintColor;
+        }];
+    }
     [self setNeedsLayout];
 }
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = "UYEditor"
-s.version          = "0.3.4"
+s.version          = "0.3.5"
 s.summary          = "UYEditor"
 s.description      = <<-DESC
 #UYEditor
@@ -22,7 +22,7 @@ s.source           = { :git => "https://github.com/youyuedu/UYEditor.git", :tag 
 s.platform     = :ios, '7.0'
 s.requires_arc = true
 
-s.resources = 'HTML/*', 'iOS/UYEditor.xcassets'
+s.resources = 'iOS/HTML/*', 'iOS/UYEditor.xcassets'
 s.source_files = 'iOS/Source/*' 
 s.frameworks = 'UIKit', 'Foundation'
 end

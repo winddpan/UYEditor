@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MZAppearance.h"
 
 @class UYEditorViewController;
 @protocol UYEditorViewControllerDelegate <NSObject>
@@ -15,16 +16,21 @@
 - (void)editorViewControllerDidInput:(UYEditorViewController *)viewController;
 @end
 
-@interface UYEditorViewController : UIViewController
+@interface UYEditorViewController : UIViewController <MZAppearance>
 
 @property (weak)    id<UYEditorViewControllerDelegate> delegate;
 @property (nonatomic, readonly) UIWebView *webView;
 @property (nonatomic, assign) BOOL editable;
 @property (nonatomic, readonly, getter=isEditing) BOOL editing;
-@property (nonatomic, assign) BOOL disableImagePicker;
 
-@property (nonatomic, copy)   NSString *placeholder;
-@property (nonatomic, copy)   NSString *html;
+@property (nonatomic, assign) BOOL disableImagePicker MZ_APPEARANCE_SELECTOR;
+@property (nonatomic, copy) UIColor *toolbarTintColor MZ_APPEARANCE_SELECTOR;
+@property (nonatomic, copy) UIFont *font MZ_APPEARANCE_SELECTOR;
+@property (nonatomic, copy) UIColor *textColor MZ_APPEARANCE_SELECTOR;
+@property (nonatomic, copy) UIColor *placeholderColor MZ_APPEARANCE_SELECTOR;
+
+@property (nonatomic, copy) NSString *placeholder;
+@property (nonatomic, copy) NSString *html;
 
 - (void)startEditing;
 - (void)stopEditing;

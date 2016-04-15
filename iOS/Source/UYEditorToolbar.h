@@ -11,12 +11,13 @@
 
 @interface UYEditorToolbar : UIView
 {
-    @private
+@private
     UIScrollView *toolBarScroll;
     UIToolbar *toolbar;
     UIToolbar *keyboardToolbar;
     CGFloat _toolbarWidth;
 }
 @property (nonatomic, assign) BOOL disableImagePicker;
+@property (nonatomic, copy)   UIColor *tintColor;
 @property (readonly, strong)  NSArray *items;
 @end

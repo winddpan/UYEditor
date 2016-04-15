@@ -16,62 +16,62 @@ init = function() {
     
     uyeditor.setPlaceholder(null);
     uyeditor.setHTML(null);
-
+    
     // Make sure that when we tap anywhere in the document we focus on the editor
     $(window).on('touchmove', function(e) {
-        uyeditor.isDragging = true;
-    });
+                 uyeditor.isDragging = true;
+                 });
     
     $(window).on('touchstart', function(e) {
-        uyeditor.isDragging = false;
-    });
-
+                 uyeditor.isDragging = false;
+                 });
+    
     $(window).on('touchend', function(e) {
-        if (uyeditor.isDragging) return;
-
-        var isEditable = uyeditor.isEditable();
-        var hasFocus = uyeditor.hasFocus();
-        var target = e.target.nodeName.toLowerCase();
-        if (!hasFocus && isEditable && (target == 'html' || target == 'body')) {
-            uyeditor.focusEditor();
-        };
-    });
+                 if (uyeditor.isDragging) return;
+                 
+                 var isEditable = uyeditor.isEditable();
+                 var hasFocus = uyeditor.hasFocus();
+                 var target = e.target.nodeName.toLowerCase();
+                 if (!hasFocus && isEditable && (target == 'html' || target == 'body')) {
+                 uyeditor.focusEditor();
+                 };
+                 });
     
     $(document).on('touchend', function(e) {
-        var isEditable = uyeditor.isEditable();
-        if (isEditable && !uyeditor.isDragging) {
-            var html = uyeditor.getHTML();
-            var target = e.target.nodeName.toLowerCase();
-                  
-            if (target == 'img') {
-                e.preventDefault();
-                var editor = $('#editor_content');
-                var range = document.createRange();
-                range.setStartAfter($(e.target).get(0));
-                range.collapse(false);
-                var selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-            }
-        }
-    });
+                   var isEditable = uyeditor.isEditable();
+                   if (isEditable && !uyeditor.isDragging) {
+                   var html = uyeditor.getHTML();
+                   var target = e.target.nodeName.toLowerCase();
+                   
+                   if (target == 'img') {
+                   e.preventDefault();
+                   var editor = $('#editor_content');
+                   var range = document.createRange();
+                   range.setStartAfter($(e.target).get(0));
+                   range.collapse(false);
+                   var selection = window.getSelection();
+                   selection.removeAllRanges();
+                   selection.addRange(range);
+                   }
+                   }
+                   });
     
     $(document).bind('input', function(e) {
-        if(uyeditor.isBackSpaceDown) {
-            if(uyeditor.isHTMLBlank()) {
-                uyeditor.setHTML(uyeditor.blankText);
-                uyeditor.focusEditor();
-            }
-        }
-        updatePlaceholder();
-        callbackInput();
-    });
+                     if(uyeditor.isBackSpaceDown) {
+                     if(uyeditor.isHTMLBlank()) {
+                     uyeditor.setHTML(uyeditor.blankText);
+                     uyeditor.focusEditor();
+                     }
+                     }
+                     updatePlaceholder();
+                     callbackInput();
+                     });
     
     $(document).on('selectionchange',function(e){
-        callbackSelection();
-        sendEnabledStyles();
-    });
-
+                   callbackSelection();
+                   sendEnabledStyles();
+                   });
+    
     var el = document.getElementById("editor_content");
     if (typeof el.addEventListener != "undefined") {
         el.addEventListener("keydown", keyDownHandler, false);
@@ -84,13 +84,13 @@ init = function() {
 
 bindImageLoadEvent = function() {
     $('img').each(function(){
-        var img = new Image();
-        img.onload = function() {
-            //console.log($(this).attr('src') + ' - done!');
-            callbackContentHeightUpdated();
-        }
-        img.src = $(this).attr('src');
-    });
+                  var img = new Image();
+                  img.onload = function() {
+                  //console.log($(this).attr('src') + ' - done!');
+                  callbackContentHeightUpdated();
+                  }
+                  img.src = $(this).attr('src');
+                  });
 }
 
 updatePlaceholder = function() {
@@ -146,7 +146,7 @@ callback = function(url) {
     // REF BUG: https://github.com/wordpress-mobile/WordPress-iOS-Editor/issues/318
     //
     iframe.style.cssText = "border: 0px transparent;";
-
+    
     document.documentElement.appendChild(iframe);
     iframe.parentNode.removeChild(iframe);
     iframe = null;
@@ -255,7 +255,7 @@ uyeditor.setPlaceholder = function(placeholder) {
 
 uyeditor.setHTML = function(html) {
     var editor = $('#editor_content');
-
+    
     if(!html || html == '' || html == '<br>'){
         html = uyeditor.blankText;
     }
@@ -268,14 +268,14 @@ uyeditor.getHTML = function() {
     var bq = $('blockquote');
     if (bq.length != 0) {
         bq.each(function() {
-            var b = $(this);
-            if (b.css('border').indexOf('none') != -1) {
+                var b = $(this);
+                if (b.css('border').indexOf('none') != -1) {
                 b.css({'border': ''});
-            }
-            if (b.css('padding').indexOf('0px') != -1) {
+                }
+                if (b.css('padding').indexOf('0px') != -1) {
                 b.css({'padding': ''});
-            }
-        });
+                }
+                });
     }
     var h = document.getElementById("editor_content").innerHTML;
     if (h == uyeditor.blankText) {
@@ -331,7 +331,7 @@ uyeditor.getYCaretInfo = function() {
     var height = 0;
     var range = selection.getRangeAt(0);
     var needsToWorkAroundNewlineBug = (range.getClientRects().length == 0);
-
+    
     // PROBLEM: iOS seems to have problems getting the offset for some empty nodes and return
     // 0 (zero) as the selection range top offset.
     //
@@ -339,12 +339,11 @@ uyeditor.getYCaretInfo = function() {
     //
     if (needsToWorkAroundNewlineBug) {
         var span = document.createElement('span');  // something happening here preventing selection of elements
-        span.appendChild( document.createTextNode("\u200b") );
         range.insertNode(span);
         y = span.offsetTop;
-        span.parentNode.removeChild(span);
         height = range.startContainer.clientHeight;
-
+        span.parentNode.removeChild(span);
+        
     }else if (range.getClientRects) {
         var rects = range.getClientRects();
         if (rects.length > 0) {
@@ -367,9 +366,9 @@ uyeditor.getYCaretInfo = function() {
     }
     caretArguments[0] = y;
     caretArguments[1] = height;
-
+    
     //debug('need:' + needsToWorkAroundNewlineBug + '--caret:' + caretArguments.join(','));
-
+    
     return caretArguments.join(',');
 }
 
@@ -383,7 +382,7 @@ uyeditor.isHTMLBlank = function() {
         var hasChildImages = (content.find('img').length > 0);
         var hasUnorderedList = (content.find('ul').length > 0);
         var hasOrderedList = (content.find('ol').length > 0);
-
+        
         if (!hasChildImages && !hasUnorderedList && !hasOrderedList) {
             return true;
         }
