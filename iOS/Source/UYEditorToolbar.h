@@ -17,7 +17,9 @@
     UIToolbar *keyboardToolbar;
     CGFloat _toolbarWidth;
 }
-@property (nonatomic, assign) BOOL disableImagePicker;
-@property (nonatomic, copy)   UIColor *tintColor;
-@property (readonly, strong)  NSArray *items;
+@property (nonatomic, assign)          BOOL disableImagePicker;
+@property (nonatomic, copy, nonnull)   UIColor *tintColor;
+@property (readonly, strong, nonnull)  NSArray<UYEditorToolbarItem *> *items;
+@property (nullable, nonatomic)        SEL action;    // default is NULL
+@property (nullable, nonatomic,weak)   id  target;    // default is nil
 @end

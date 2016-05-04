@@ -76,10 +76,8 @@ static const CGFloat kToolbarHeight = 44.0;
     self.editorView.webView.customInputAccessoryView = self.toolbar;
     self.toolbar.disableImagePicker = self.disableImagePicker;
     self.toolbar.tintColor = self.toolbarTintColor;
-    [self.toolbar.items enumerateObjectsUsingBlock:^(UYEditorToolbarItem *item, NSUInteger idx, BOOL *stop) {
-        [item setTarget:self];
-        [item setAction:@selector(triggleToolbarItemAction:)];
-    }];
+    self.toolbar.target = self;
+    self.toolbar.action = @selector(triggleToolbarItemAction:);
 }
 
 - (UYEditorView *)editorView {
@@ -243,10 +241,6 @@ static const CGFloat kToolbarHeight = 44.0;
     
     // ToolbarItem会重新生成，需要重新指定target selector
     self.toolbar.disableImagePicker = disableImagePicker;
-    [self.toolbar.items enumerateObjectsUsingBlock:^(UYEditorToolbarItem *item, NSUInteger idx, BOOL *stop) {
-        [item setTarget:self];
-        [item setAction:@selector(triggleToolbarItemAction:)];
-    }];
 }
 
 - (void)setToolbarTintColor:(UIColor *)toolbarTintColor {
@@ -321,11 +315,11 @@ static const CGFloat kToolbarHeight = 44.0;
 
 - (void)editorView:(UYEditorView *)editorView stylesForCurrentSelection:(NSArray *)styles {
     [self.toolbar.items enumerateObjectsUsingBlock:^(UYEditorToolbarItem *eItem, NSUInteger idx, BOOL *stop) {
-        eItem.selected = NO;
+        eItem.button.selected = NO;
     }];
     [styles enumerateObjectsUsingBlock:^(NSString *style, NSUInteger idx, BOOL *stop) {
         UYEditorToolbarItem *item = [self toolbarItemForStyle:style];
-        item.selected = YES;
+        item.button.selected = YES;
     }];
 }
 

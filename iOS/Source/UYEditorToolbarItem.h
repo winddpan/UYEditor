@@ -25,7 +25,7 @@ typedef enum : NSUInteger {
 
 @interface UYEditorToolbarItem : UIBarButtonItem
 @property (nonatomic)   UYEditorToolbarItemIdentifer actionIdentifer;
-@property (nonatomic)   BOOL selected;
-@property (nonatomic)   BOOL enableSelected;
-@property (strong, nonatomic)   UIColor *selectedColor;
+@property (strong, nonatomic) UIImage *toolbarImage;
+@property (strong, nonatomic) UIColor *toolbarColor;
+@property (strong, readonly) UIButton *button;
 @end

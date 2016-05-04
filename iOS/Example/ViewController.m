@@ -27,7 +27,7 @@
 
 - (void)testSubNav {
     [[UYEditorViewController appearance] setFont:[UIFont fontWithName:@"AmericanTypewriter" size:30]];
-    [[UYEditorViewController appearance] setToolbarTintColor:[UIColor blueColor]];
+    [[UYEditorViewController appearance] setToolbarTintColor:[UIColor yellowColor]];
     [[UYEditorViewController appearance] setDisableImagePicker:YES];
     
     UYEditorViewController *new = [[UYEditorViewController alloc] init];
