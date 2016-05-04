@@ -73,11 +73,12 @@ static const CGFloat kToolbarHeight = 44.0;
     self.editorView.delegate = self;
     [self.view addSubview:self.editorView];
     
-    self.editorView.webView.customInputAccessoryView = self.toolbar;
+    self.toolbar = [[UYEditorToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kToolbarHeight)];
     self.toolbar.disableImagePicker = self.disableImagePicker;
     self.toolbar.tintColor = self.toolbarTintColor;
     self.toolbar.target = self;
     self.toolbar.action = @selector(triggleToolbarItemAction:);
+    self.editorView.webView.customInputAccessoryView = self.toolbar;
 }
 
 - (UYEditorView *)editorView {
@@ -85,13 +86,6 @@ static const CGFloat kToolbarHeight = 44.0;
         _editorView = [[UYEditorView alloc] init];
     }
     return _editorView;
-}
-
-- (UYEditorToolbar *)toolbar {
-    if (!_toolbar) {
-        _toolbar = [[UYEditorToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kToolbarHeight)];
-    }
-    return _toolbar;
 }
 
 #pragma clang diagnostic push
@@ -238,14 +232,12 @@ static const CGFloat kToolbarHeight = 44.0;
 
 - (void)setDisableImagePicker:(BOOL)disableImagePicker {
     _disableImagePicker = disableImagePicker;
-    
-    // ToolbarItem会重新生成，需要重新指定target selector
-    self.toolbar.disableImagePicker = disableImagePicker;
+    _toolbar.disableImagePicker = disableImagePicker;
 }
 
 - (void)setToolbarTintColor:(UIColor *)toolbarTintColor {
     _toolbarTintColor = toolbarTintColor;
-    self.toolbar.tintColor = toolbarTintColor;
+    _toolbar.tintColor = toolbarTintColor;
 }
 
 #pragma mark - ToolbarItem Actions
